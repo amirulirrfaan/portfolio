@@ -1,25 +1,67 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Badge } from "../ui/badge";
+import {
+  FaAndroid,
+  FaDocker,
+  FaGithub,
+  FaNodeJs,
+  FaPhp,
+  FaReact,
+} from "react-icons/fa";
+import {
+  SiApple,
+  SiFirebase,
+  SiFlutter,
+  SiMongodb,
+  SiMysql,
+  SiNextdotjs,
+  SiPostman,
+  SiTailwindcss,
+  SiTypescript,
+  SiVercel,
+} from "react-icons/si";
 import { Card, CardContent } from "../ui/card";
 
 const skillCategories = [
   {
     title: "Frontend",
-    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Flutter"],
+    skills: [
+      { name: "React", icon: FaReact },
+      { name: "Next.js", icon: SiNextdotjs },
+      { name: "TypeScript", icon: SiTypescript },
+      { name: "Tailwind CSS", icon: SiTailwindcss },
+      { name: "Flutter", icon: SiFlutter },
+    ],
   },
   {
     title: "Backend",
-    skills: ["Node.js", "Express", "PHP", "MySQL", "MongoDB"],
+    skills: [
+      { name: "Node.js", icon: FaNodeJs },
+      { name: "Express", icon: null },
+      { name: "PHP", icon: FaPhp },
+      { name: "MySQL", icon: SiMysql },
+      { name: "MongoDB", icon: SiMongodb },
+    ],
   },
   {
     title: "Mobile",
-    skills: ["React Native", "Flutter", "iOS", "Android"],
+    skills: [
+      { name: "React Native", icon: FaReact },
+      { name: "Flutter", icon: SiFlutter },
+      { name: "iOS", icon: SiApple },
+      { name: "Android", icon: FaAndroid },
+    ],
   },
   {
     title: "Tools & Others",
-    skills: ["Git", "Docker", "Firebase", "Postman"],
+    skills: [
+      { name: "GitHub", icon: FaGithub },
+      { name: "Docker", icon: FaDocker },
+      { name: "Firebase", icon: SiFirebase },
+      { name: "Vercel", icon: SiVercel },
+      { name: "Postman", icon: SiPostman },
+    ],
   },
 ];
 
@@ -32,7 +74,9 @@ export default function Skills() {
         transition={{ duration: 0.5 }}
         viewport={{ once: true }}
       >
-        <h2 className="text-3xl font-bold text-center mb-12">Skills</h2>
+        <h2 className="text-3xl font-bold text-center mb-12 dark:text-white">
+          Skills
+        </h2>
         <div className="grid md:grid-cols-2 gap-6">
           {skillCategories.map((category, index) => (
             <motion.div
@@ -43,19 +87,32 @@ export default function Skills() {
               viewport={{ once: true }}
             >
               <motion.div
-                whileHover={{ scale: 1.05 }} // Add the hover effect for scaling
-                transition={{ duration: 0.3 }} // Duration for the scaling animation
+                whileHover={{
+                  y: -5,
+                  transition: { duration: 0.3, ease: "easeOut" },
+                }}
+                className="h-full"
               >
-                <Card>
+                <Card className="h-full bg-white dark:bg-gray-800 border dark:border-gray-700 shadow-sm">
                   <CardContent className="p-6">
-                    <h3 className="text-xl font-semibold mb-4">
+                    <h3 className="text-xl font-semibold mb-4 dark:text-white">
                       {category.title}
                     </h3>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-3">
                       {category.skills.map((skill) => (
-                        <Badge key={skill} variant="secondary">
-                          {skill}
-                        </Badge>
+                        <motion.div
+                          key={skill.name}
+                          whileHover={{ scale: 1.1 }}
+                          transition={{ duration: 0.3, ease: "easeOut" }}
+                          className="flex items-center gap-2 bg-gray-50 dark:bg-gray-700 px-3 py-2 rounded-lg border shadow-sm dark:border-gray-600"
+                        >
+                          {skill.icon && (
+                            <skill.icon className="text-xl text-blue-500 dark:text-blue-400" />
+                          )}
+                          <span className="text-sm font-medium dark:text-gray-200">
+                            {skill.name}
+                          </span>
+                        </motion.div>
                       ))}
                     </div>
                   </CardContent>
