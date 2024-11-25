@@ -48,7 +48,7 @@ const projects = [
     description:
       "TypeMaster is an interactive online typing test platform that helps users improve their typing speed and accuracy. Users can track their progress by viewing detailed statistics, including their words per minute (WPM) and average performance over time.",
     technologies: ["React", "NextJs", "ShadCN", "Tailwind"],
-    github: "https://github.com",
+    github: "https://github.com/amirulirrfaan/typemaster",
     live: "https://typemasterdev.netlify.app/",
     image: "/assets/images/typemaster.png",
   },

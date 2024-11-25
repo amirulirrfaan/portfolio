@@ -19,7 +19,7 @@ const experiences = [
   {
     title: "Software Engineer Intern ",
     company: "Critical Manufacturing Malaysia",
-    period: "2019 - 2021",
+    period: "March 2023 - September 2023",
     responsibilities: [
       "Developed cross-platform mobile applications",
       "Optimized app performance and reduced load times",
