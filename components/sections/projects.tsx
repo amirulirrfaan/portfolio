@@ -72,12 +72,6 @@ export default function Projects() {
     }
   };
 
-  React.useEffect(() => {
-    // Scroll to the section after page change
-    const section = document.getElementById("projects");
-    section?.scrollIntoView({ behavior: "smooth" });
-  }, [currentPage]);
-
   return (
     <section id="projects" className="py-20">
       <motion.div
