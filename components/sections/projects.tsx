@@ -1,9 +1,16 @@
-"use client";
-
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 import { motion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "next/link"; // Import Link from Next.js
+import React from "react";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
@@ -12,56 +19,64 @@ const projects = [
   {
     title: "KitaCycle: Waste Management App",
     description:
-      "A full-featured e-commerce platform with real-time inventory management.",
+      "KitaCycle is a mobile application designed to revolutionize waste management in Malaysia by addressing inefficiencies and challenges faced by both consumers and waste collectors.",
     technologies: ["React Native", "ExpressJS", "MongoDB"],
     github: "https://github.com",
-    live: "https://example.com",
+    live: "https://pixelusm.com/projects/id/U2FsdGVkX18exdJUVUn9OiOD0RUHbSMXC0BMTRbmmrfx7JWHz437cspRYPF1Cydh",
     image: "/assets/images/kitacycle.png",
   },
   {
     title: "iQalqalah",
     description:
-      "A mobile-first task management application with collaborative features.",
+      "IqAlqalah is a fun, interactive app that teaches Tajweed rules through quizzes, notes, and games, making Quran learning engaging and easy for kids.",
     technologies: ["Flutter", "Firebase"],
-    github: "https://github.com",
-    live: "https://example.com",
-    image:
-      "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?w=800&h=400&fit=crop",
+    github: "https://github.com/amirulirrfaan/iqalqalah",
+    live: "https://github.com/amirulirrfaan/iqalqalah",
+    image: "/assets/images/iqalqalah_screenshot.jpg",
   },
   {
     title: "Oxsika iKUPS ",
-    description: "A real-time messaging platform with end-to-end encryption.",
-    technologies: ["React", "NextJs"],
+    description:
+      "Oxsika is a high school alumni website that connects former students, fostering lifelong bonds through shared memories, events, and networking opportunities.",
+    technologies: ["React", "NextJs", "ShadCN", "Tailwind"],
     github: "https://github.com",
-    live: "https://example.com",
-    image:
-      "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&h=400&fit=crop",
+    live: "https://oxsika.netlify.app/",
+    image: "/assets/images/oxsika_screenshot.png",
+  },
+  {
+    title: "TypeMaster: Typing Test Website",
+    description:
+      "TypeMaster is an interactive online typing test platform that helps users improve their typing speed and accuracy. Users can track their progress by viewing detailed statistics, including their words per minute (WPM) and average performance over time.",
+    technologies: ["React", "NextJs", "ShadCN", "Tailwind"],
+    github: "https://github.com",
+    live: "https://typemasterdev.netlify.app/",
+    image: "/assets/images/typemaster.png",
   },
 ];
 
 export default function Projects() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const itemsPerPage = 3;
+
+  const totalPages = Math.ceil(projects.length / itemsPerPage);
+  const indexOfLastProject = currentPage * itemsPerPage;
+  const indexOfFirstProject = indexOfLastProject - itemsPerPage;
+  const currentProjects = projects.slice(
+    indexOfFirstProject,
+    indexOfLastProject
+  );
+
+  const handlePageChange = (page: number) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
   };
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 15,
-      },
-    },
-  };
+  React.useEffect(() => {
+    // Scroll to the section after page change
+    const section = document.getElementById("projects");
+    section?.scrollIntoView({ behavior: "smooth" });
+  }, [currentPage]);
 
   return (
     <section id="projects" className="py-20">
@@ -69,10 +84,9 @@ export default function Projects() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        variants={containerVariants}
         className="container mx-auto px-4"
       >
-        <motion.div variants={cardVariants} className="text-center mb-16">
+        <motion.div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Featured Projects
           </h2>
@@ -82,13 +96,8 @@ export default function Projects() {
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project) => (
-            <motion.div
-              key={project.title}
-              variants={cardVariants}
-              whileHover={{ y: -8 }}
-              className="group"
-            >
+          {currentProjects.map((project) => (
+            <motion.div key={project.title} className="group">
               <Card className="h-full overflow-hidden border-primary/10 bg-gradient-to-b from-background to-primary/5">
                 <div className="relative h-48 overflow-hidden">
                   <Image
@@ -154,6 +163,42 @@ export default function Projects() {
             </motion.div>
           ))}
         </div>
+
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault(); // Prevent scroll to top
+                  handlePageChange(currentPage - 1);
+                }}
+              />
+            </PaginationItem>
+            {[...Array(totalPages)].map((_, index) => (
+              <PaginationItem key={index}>
+                <PaginationLink
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault(); // Prevent scroll to top
+                    handlePageChange(index + 1);
+                  }}
+                >
+                  {index + 1}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+            <PaginationItem>
+              <PaginationNext
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault(); // Prevent scroll to top
+                  handlePageChange(currentPage + 1);
+                }}
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
       </motion.div>
     </section>
   );
