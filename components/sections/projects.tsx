@@ -26,6 +26,15 @@ const projects = [
     image: "/assets/images/kitacycle.png",
   },
   {
+    title: "Pest Control Service Website",
+    description:
+      "TypeMaster is an interactive online typing test platform that helps users improve their typing speed and accuracy. Users can track their progress by viewing detailed statistics, including their words per minute (WPM) and average performance over time.",
+    technologies: ["React", "Vite", "Tailwind"],
+    github: "https://github.com/amirulirrfaan/david-pest-control-website",
+    live: "https://silver-puffpuff-a98d97.netlify.app/",
+    image: "/assets/images/pest_control.png",
+  },
+  {
     title: "iQalqalah",
     description:
       "IqAlqalah is a fun, interactive app that teaches Tajweed rules through quizzes, notes, and games, making Quran learning engaging and easy for kids.",
