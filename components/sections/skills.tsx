@@ -73,10 +73,15 @@ export default function Skills() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         viewport={{ once: true }}
+        className="container mx-auto px-4"
       >
-        <h2 className="text-3xl font-bold text-center mb-12 dark:text-white">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/50">
           Skills
         </h2>
+        <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-12">
+          Technologies and tools I work with
+        </p>
+
         <div className="grid md:grid-cols-2 gap-6">
           {skillCategories.map((category, index) => (
             <motion.div
@@ -86,38 +91,30 @@ export default function Skills() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <motion.div
-                whileHover={{
-                  y: -5,
-                  transition: { duration: 0.3, ease: "easeOut" },
-                }}
-                className="h-full"
-              >
-                <Card className="h-full bg-white dark:bg-gray-800 border dark:border-gray-700 shadow-sm">
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-semibold mb-4 dark:text-white">
-                      {category.title}
-                    </h3>
-                    <div className="flex flex-wrap gap-3">
-                      {category.skills.map((skill) => (
-                        <motion.div
-                          key={skill.name}
-                          whileHover={{ scale: 1.1 }}
-                          transition={{ duration: 0.3, ease: "easeOut" }}
-                          className="flex items-center gap-2 bg-gray-50 dark:bg-gray-700 px-3 py-2 rounded-lg border shadow-sm dark:border-gray-600"
-                        >
-                          {skill.icon && (
-                            <skill.icon className="text-xl text-blue-500 dark:text-blue-400" />
-                          )}
-                          <span className="text-sm font-medium dark:text-gray-200">
-                            {skill.name}
-                          </span>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
+              <Card className="h-full border border-border/40 bg-card hover:border-primary/20 hover:shadow-md transition-all duration-300">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold mb-6 text-primary">
+                    {category.title}
+                  </h3>
+                  <div className="flex flex-wrap gap-3">
+                    {category.skills.map((skill) => (
+                      <motion.div
+                        key={skill.name}
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ duration: 0.2 }}
+                        className="flex items-center gap-2 bg-secondary/10 px-3 py-2 rounded-lg border border-primary/10"
+                      >
+                        {skill.icon && (
+                          <skill.icon className="text-xl text-primary" />
+                        )}
+                        <span className="text-sm font-medium">
+                          {skill.name}
+                        </span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
             </motion.div>
           ))}
         </div>

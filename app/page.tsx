@@ -1,31 +1,28 @@
 "use client";
 
 import About from "@/components/sections/about";
-import Contact from "@/components/sections/contact";
 import Experience from "@/components/sections/experience";
 import Hero from "@/components/sections/hero";
 import Projects from "@/components/sections/projects";
 import Skills from "@/components/sections/skills";
-import { motion } from "framer-motion";
 
 export default function Home() {
   return (
-    <>
-      <Hero />
+    <div className="flex flex-col lg:flex-row min-h-screen">
+      {/* Fixed left hero section */}
+      <div className="lg:w-[40%] lg:fixed lg:top-0 lg:left-0 lg:h-screen">
+        <Hero />
+      </div>
 
-      <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
+      {/* Scrollable right content */}
+      <div className="lg:w-[60%] lg:ml-[40%]">
+        <div className="max-w-3xl mx-auto px-4 py-16">
           <About />
+          <Experience />
           <Skills />
           <Projects />
-          <Experience />
-          <Contact />
-        </motion.div>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
