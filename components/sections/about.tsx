@@ -17,7 +17,7 @@ export default function About() {
           <p className="text-muted-foreground">
             Hi! I'm Amirul, a software engineer who loves building digital
             experiences that live on the web. My journey in web development
-            began in 2020 when I started customizing Blogger themes. What
+            began in 2012 when I started customizing Blogger themes. What
             started as a fun project with HTML and CSS turned into a passion for
             creating websites and apps!
           </p>
