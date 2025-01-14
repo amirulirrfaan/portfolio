@@ -29,7 +29,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative h-full flex flex-col justify-between bg-grid-pattern p-8 py-20">
+    <section className="relative h-full flex flex-col justify-center bg-grid-pattern p-20">
       <div className="absolute inset-0 bg-background/90 backdrop-blur-sm" />
 
       {/* Theme Toggle */}
@@ -42,105 +42,100 @@ export default function Hero() {
         <ModeToggle />
       </motion.div>
 
-      {/* Container for alignment */}
-      <div className="flex flex-col h-full justify-between items-center lg:items-end lg:pr-16">
-        {/* Main content */}
+      {/* Main Content */}
+      <div className="z-10 max-w-3xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="z-10 pt-16 md:pt-24"
+          transition={{ duration: 0.5 }}
+          className="space-y-5"
         >
-          <div className="max-w-md">
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="text-primary font-sans text-sm mb-4"
-            >
-              Hi, my name is
-            </motion.p>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="text-primary font-sans text-sm"
+          >
+            Hi, my name is
+          </motion.p>
 
-            <h1 className="text-3xl md:text-4xl font-sans font-bold mb-3">
-              Amirul Irfaan.
-            </h1>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">
+            Amirul Irfaan.
+          </h1>
+          <h2 className="text-3xl sm:text-4xl font-bold text-muted-foreground">
+            I build things for the web.
+          </h2>
+          <p className="text-muted-foreground max-w-xl">
+            I'm a software engineer specializing in building web and mobile
+            applications.
+          </p>
 
-            <h2 className="text-2xl md:text-3xl font-sans font-bold text-muted-foreground mb-6">
-              I build things for the web.
-            </h2>
-
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="text-muted-foreground font-sans text-sm mb-8"
-            >
-              I'm a software engineer specializing in building exceptional
-              digital experiences. Currently, I'm focused on building
-              accessible, human-centered products.
-            </motion.p>
-
-            {/* Navigation Menu - Hidden on mobile */}
-            <motion.nav
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-              className="z-10 hidden lg:block"
-            >
-              <ul className="flex flex-col gap-4">
-                {menuItems.map((item, index) => (
-                  <motion.li
-                    key={item.href}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.8 + index * 0.1 }}
+          {/* Navigation */}
+          <motion.nav
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="pt-8"
+          >
+            <ul className="flex flex-col gap-3">
+              {menuItems.map((item, i) => (
+                <motion.li
+                  key={item.href}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.4 + i * 0.1 }}
+                >
+                  <Link
+                    href={item.href}
+                    onClick={(e) => handleScroll(e, item.href)}
+                    className="group flex items-center gap-4 text-muted-foreground hover:text-primary transition-colors"
                   >
-                    <Link
-                      href={item.href}
-                      onClick={(e) => handleScroll(e, item.href)}
-                      className="group flex items-center gap-4 text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      <span className="h-[1px] w-12 bg-primary/30 group-hover:w-24 group-hover:bg-primary transition-all" />
-                      <span className="font-sans text-sm">{item.label}</span>
-                    </Link>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.nav>
-          </div>
+                    <span className="h-[1px] w-12 bg-primary/30 group-hover:w-24 group-hover:bg-primary transition-all" />
+                    <span className="text-sm uppercase tracking-wider">
+                      {item.label}
+                    </span>
+                  </Link>
+                </motion.li>
+              ))}
+            </ul>
+          </motion.nav>
         </motion.div>
 
         {/* Social Links */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-          className="z-10 flex flex-wrap gap-3"
+          transition={{ delay: 0.8 }}
+          className="flex gap-4 mt-12"
         >
           <Link href="https://github.com/amirulirrfaan" target="_blank">
             <Button
-              variant="outline"
-              size="default"
-              className="group border-primary/20 hover:border-primary/50"
+              variant="ghost"
+              size="icon"
+              className="text-muted-foreground hover:text-primary"
             >
-              <Github className="h-4 w-4 transition-transform group-hover:scale-110" />
-              GitHub
+              <Github className="h-5 w-5" />
+              <span className="sr-only">GitHub</span>
             </Button>
           </Link>
           <Link href="https://linkedin.com/in/amirulirrfaan" target="_blank">
             <Button
-              variant="outline"
-              size="default"
-              className="group border-primary/20 hover:border-primary/50"
+              variant="ghost"
+              size="icon"
+              className="text-muted-foreground hover:text-primary"
             >
-              <Linkedin className="h-4 w-4 transition-transform group-hover:scale-110" />
-              LinkedIn
+              <Linkedin className="h-5 w-5" />
+              <span className="sr-only">LinkedIn</span>
             </Button>
           </Link>
           <Link href="mailto:amirulirrfaan@gmail.com">
-            <Button variant="default" size="default" className="group">
-              <Mail className="h-4 w-4 transition-transform group-hover:scale-110" />
-              Contact
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-muted-foreground hover:text-primary"
+            >
+              <Mail className="h-5 w-5" />
+              <span className="sr-only">Email</span>
             </Button>
           </Link>
         </motion.div>
